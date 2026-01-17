@@ -1,40 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> Day 1</title>
+    <title>Nitya Parmar | Mission 2026</title>
     <style>
-        body{
-            background-color:#1a1a1a;
-            color:#e0e0e0;
-            font-family:monospace;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            text-align:center;
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            font-family: 'Courier New', monospace; /* Classic dev font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            margin: 0;
         }
-        h1{font-size: 3rem; color:#4CAF50;}
-        P{font-size:1.5rem;}
+        .container {
+            background: #252525;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.2); /* Subtle glow */
+            max-width: 600px;
+            width: 90%;
+        }
+        h1 { font-size: 2.5rem; color: #4CAF50; margin-bottom: 0.5rem; }
+        p { font-size: 1.2rem; margin: 10px 0; }
+
+        /* TIMER STYLES */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .time-box {
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 70px;
+            border: 1px solid #4CAF50;
+        }
+        .time-val {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            display: block;
+        }
+        .time-label {
+            font-size: 0.8rem;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+
+        /* LIST STYLES */
+        ul { list-style-type: none; padding: 0; text-align: left; display: inline-block; }
+        li { margin: 8px 0; font-size: 1.1rem; }
+
+        .quote { font-style: italic; color: #ffeb3b; margin-top: 20px; }
+        .footer { font-size: 0.8rem; color: #666; margin-top: 30px; }
     </style>
 </head>
-<body><div class="container">
-    <h1>Nitya Parmar</h1>
-    <p>Status: <span style="color: #ff4081;">ONLINE & BUILDING</span></p>
+<body>
 
-    <hr style="width:50%; border-color:#333;">
-    <h3>🚀 Current Mission</h3>
-    <p>Internship Ready by May 2026</p>
-    <h3> Project-X Protocol</h3>
-    <ul style="list-style-type: none; padding:0;">
+<div class="container">
+    <h1>Nitya Parmar</h1>
+    <p>Status: <span style="color: #ff4081; font-weight: bold;">ONLINE & BUILDING</span></p>
+
+    <hr style="width: 50%; border-color: #333; margin: 20px auto;">
+
+    <h3>🚀 Mission: Internship Ready</h3>
+
+    <div class="timer-container">
+        <div class="time-box">
+            <span class="time-val" id="days">00</span>
+            <span class="time-label">Days</span>
+        </div>
+        <div class="time-box">
+            <span class="time-val" id="hours">00</span>
+            <span class="time-label">Hours</span>
+        </div>
+        <div class="time-box">
+            <span class="time-val" id="minutes">00</span>
+            <span class="time-label">Mins</span>
+        </div>
+        <div class="time-box">
+            <span class="time-val" id="seconds">00</span>
+            <span class="time-label">Secs</span>
+        </div>
+    </div>
+    <p style="font-size: 0.9rem; color: #4CAF50;">Target: May 1, 2026</p>
+
+    <hr style="width: 50%; border-color: #333; margin: 20px auto;">
+
+    <h3>Project-X Protocol</h3>
+    <ul>
         <li>🛡️ DevID Guardian <span style="color:#666;">(Coming Soon)</span></li>
         <li>🏥️ NEETRoyal <span style="color:#666;">(Loading...)</span></li>
-        <li>🛡️ ⚔️ Rākshaka <span style="color:#666;">(The Dream)</span></li>
+        <li>⚔️ Rākshaka <span style="color:#666;">(The Dream)</span></li>
     </ul>
+
     <br>
-    <p style="font-size:0.9rem;">"Live a life you will remember." - The Nights</p>
-    <br>
-    <p style="font-style: italic; color: #ffeb3b;">"Giving up is not in the blood." - Nimsdai</p>
-    <br><small>Start Date: Jan 17, 2026</small>
+    <p class="quote">"Giving up is not in the blood." - Nimsdai</p>
+    <p class="footer">Start Date: Jan 17, 2026 | Location: INDIA</p>
 </div>
-</body>
-</html>
+
+<script>
+    // --- DEBUGGING LOG ---
+    console.log("Timer Script Loaded. Target: May 1, 2026");
+
+    // 1. Set the date using ISO format (YYYY-MM-DD) which is safer
+    // Note: 'T00:00:00' ensures it starts at midnight local time
+    const countDownDate = new Date("2026-05-01T00:00:00").getTime();
+
+    // 2. Update the count down every 1 second
+    const x = setInterval(function() {
+
+        // Get today's date and time
+        const now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        const distance = countDownDate - now;
+
+        // Check if date is valid
+        if (isNaN(distance)) {
+            console.error("Date Format Error: The browser can't read the date.");
+            clearInterval(x);
+            return;
+        }
+
+        // Time calculations
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Inject into HTML
+        // We use check to ensure element exists before writing
+        if(document.getElementById("days")) {
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+
+        // If the count down is finished
+        if (distance < 0) {
+            clearInterval(x);
+            document.querySelector(".timer-container").innerHTML = "<h2 style='color:red;'>MISSION ACTIVE</h2>";
+        }
+    }, 1000);
+</script>
